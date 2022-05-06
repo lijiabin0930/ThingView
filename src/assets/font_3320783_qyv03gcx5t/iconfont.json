@@ -1,0 +1,86 @@
+{
+  "id": "3320783",
+  "name": "kubeedge",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5937018",
+      "name": "边缘计算虚拟化",
+      "font_class": "bianyuanjisuanxunihua",
+      "unicode": "e684",
+      "unicode_decimal": 59012
+    },
+    {
+      "icon_id": "6723126",
+      "name": "边缘计算",
+      "font_class": "bianyuanjisuan",
+      "unicode": "e677",
+      "unicode_decimal": 58999
+    },
+    {
+      "icon_id": "9483548",
+      "name": "边缘计算",
+      "font_class": "bianyuanjisuan1",
+      "unicode": "ec3a",
+      "unicode_decimal": 60474
+    },
+    {
+      "icon_id": "10538920",
+      "name": "边缘计算",
+      "font_class": "bianyuanjisuan2",
+      "unicode": "e71e",
+      "unicode_decimal": 59166
+    },
+    {
+      "icon_id": "11118743",
+      "name": "边缘计算PES",
+      "font_class": "PES",
+      "unicode": "e713",
+      "unicode_decimal": 59155
+    },
+    {
+      "icon_id": "11804556",
+      "name": "icon-边缘计算",
+      "font_class": "icon-bianyuanjisuan",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "11841955",
+      "name": "边缘计算",
+      "font_class": "bianyuanjisuan3",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "11892919",
+      "name": "边缘计算",
+      "font_class": "bianyuanjisuan4",
+      "unicode": "e73e",
+      "unicode_decimal": 59198
+    },
+    {
+      "icon_id": "12488165",
+      "name": "边缘计算",
+      "font_class": "bianyuanjisuan5",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "19209710",
+      "name": "边缘计算",
+      "font_class": "bianyuanjisuan6",
+      "unicode": "e639",
+      "unicode_decimal": 58937
+    },
+    {
+      "icon_id": "21563314",
+      "name": "边缘计算",
+      "font_class": "bianyuanjisuan7",
+      "unicode": "e91e",
+      "unicode_decimal": 59678
+    }
+  ]
+}
