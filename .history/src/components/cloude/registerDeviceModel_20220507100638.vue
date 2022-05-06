@@ -12,7 +12,7 @@
         <el-dialog title="提示" :visible.sync="dialogUploadFileVisible" width="60%">
             <div>
                 <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" accept=".json"
-                    :on-success="uploadSuccess" :limit="1" :file-list="fileList">
+                    :on-success="uploadSuccess" :limit="1" :file-list="">
                     <el-button size="small" type="primary">点击上传</el-button>
                     <div slot="tip" class="el-upload__tip">只能上传json文件</div>
                 </el-upload>
@@ -20,10 +20,7 @@
                     <b-code-editor v-model="jsonStr" :auto-format="true" :smart-indent="true" theme="dracula"
                         :indent-unit="4" :line-wrap="false" ref="editor"></b-code-editor>
                     <br>
-                    <el-row :gutter="20">   
-                    <el-col :span="18" :offset="22"><el-button type="warning" @click="onSubumitJson">提交</el-button></el-col>
-                    </el-row>
-                    
+                    <el-button type="primary" @click="onSubumitJson">提交</el-button>
                 </div>
 
             </div>
@@ -53,8 +50,6 @@ export default {
             this.dialogUploadFileVisible = false
             this.isok = false
             this.jsonSt = null
-            this.fileList = []
-            //json 给后端 
             
         },
         oepndialogTSLModelVisible(result) {

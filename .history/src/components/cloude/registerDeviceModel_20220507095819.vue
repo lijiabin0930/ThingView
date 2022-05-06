@@ -12,21 +12,22 @@
         <el-dialog title="提示" :visible.sync="dialogUploadFileVisible" width="60%">
             <div>
                 <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" accept=".json"
-                    :on-success="uploadSuccess" :limit="1" :file-list="fileList">
+                    :on-success="uploadSuccess" :limit="1">
                     <el-button size="small" type="primary">点击上传</el-button>
                     <div slot="tip" class="el-upload__tip">只能上传json文件</div>
                 </el-upload>
-                <div v-if="isok" style="margin-left: 30px;margin-top: 30px;">
+                <div style="width: 70%;margin-left: 30px;margin-top: 30px;">
                     <b-code-editor v-model="jsonStr" :auto-format="true" :smart-indent="true" theme="dracula"
                         :indent-unit="4" :line-wrap="false" ref="editor"></b-code-editor>
                     <br>
-                    <el-row :gutter="20">   
-                    <el-col :span="18" :offset="22"><el-button type="warning" @click="onSubumitJson">提交</el-button></el-col>
-                    </el-row>
-                    
+                    <el-button type="primary" @click="onSubumit">提交</el-button>
                 </div>
 
             </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogUploadFileVisible = false">取 消</el-button>
+                <el-button type="primary" @click="dialogUploadFileVisible = false">确 定</el-button>
+            </span>
         </el-dialog>
 
 
@@ -49,14 +50,6 @@ export default {
         console.log(this.modelDeviceJson);
     },
     methods: {
-        onSubumitJson(){
-            this.dialogUploadFileVisible = false
-            this.isok = false
-            this.jsonSt = null
-            this.fileList = []
-            //json 给后端 
-            
-        },
         oepndialogTSLModelVisible(result) {
             this.dialogTSLModelVisible = result
             pubsub.publishSync("showTSLDialog", this.dialogTSLModelVisible);
@@ -69,52 +62,21 @@ export default {
             if (file.status == 'success') {
                 this.$message.success(`上传文件${file.name}成功`)
             }
-            this.isok =true
-        },
-        // 检测json格式
-        isJSON(str) {
-            if (typeof str == 'string') {
-                try {
-                    var obj = JSON.parse(str);
-                    if (typeof obj == 'object' && obj) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-
-                } catch (e) {
-                    return false;
-                }
-            } else if (typeof str == 'object' && str) {
-                return true;
-            }
-        },
-        onSubumit() {
-            if (!this.isJSON(this.jsonStr)) {
-                this.$message.error(`json格式错误`)
-                return false
-            }
-            this.$message.success('json格式正确')
         }
+
     },
     data() {
         return {
-            fileList:[],
             dialogTSLModelVisible: false,
             dialogUploadFileVisible: false,
-            jsonStr: `{
-                    "employees": [{
-                    "firstName": "Bill",
-                    "lastName": "Gates"
-                    }, {
-                    "firstName": "George",
-                    "lastName": "Bush"
-                    }, {
-                    "firstName": "Thomas",
-                    "lastName": "Carter"
-                    }]
-                         }`,
-            isok: false
+            initialJson: {
+                "Array": [1, 2, 3],
+                "Boolean": true,
+                "Null": null,
+                "Number": 123,
+                "Object": { "a": "b", "c": "d" },
+                "String": "Hello World"
+            }
 
 
         };

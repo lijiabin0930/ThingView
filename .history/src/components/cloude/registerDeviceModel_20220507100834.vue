@@ -20,10 +20,7 @@
                     <b-code-editor v-model="jsonStr" :auto-format="true" :smart-indent="true" theme="dracula"
                         :indent-unit="4" :line-wrap="false" ref="editor"></b-code-editor>
                     <br>
-                    <el-row :gutter="20">   
-                    <el-col :span="18" :offset="22"><el-button type="warning" @click="onSubumitJson">提交</el-button></el-col>
-                    </el-row>
-                    
+                    <el-button type="warning" @click="onSubumitJson">提交</el-button>
                 </div>
 
             </div>

@@ -7,12 +7,8 @@ import "./assets/css/global.css"
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
-
 import JsonViewer from 'vue-json-viewer'
-
-
-import CodeEditor from 'bin-code-editor';
-Vue.use(CodeEditor);
+  
 Vue.use(JsonViewer)
 import 'default-passive-events'
 
