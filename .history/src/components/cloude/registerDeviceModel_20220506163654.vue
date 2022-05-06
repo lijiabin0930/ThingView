@@ -9,13 +9,13 @@
         <device-model-vue></device-model-vue>
 
         <!-- 文件上传逻辑解析 -->
-        <el-dialog title="提示" :visible.sync="dialogUploadFileVisible" width="60%">
+        <el-dialog title="提示" :visible.sync="dialogUploadFileVisible" width="30%" :before-close="handleClose">
             <div>
-                <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" accept=".json"
-                 :on-success="uploadSuccess" :on-remove="removeFile" :on-error="showUploadError"
-                    :limit="1">
+                <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/"
+                    :on-preview="handlePreview" :on-remove="handleRemove" :before-remove="beforeRemove" multiple
+                    :limit="3" :on-exceed="handleExceed" :file-list="fileList">
                     <el-button size="small" type="primary">点击上传</el-button>
-                    <div slot="tip" class="el-upload__tip">只能上传json文件</div>
+                    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
                 </el-upload>
             </div>
 
@@ -47,24 +47,12 @@ export default {
         oepndialogTSLModelVisible(result) {
             this.dialogTSLModelVisible = result
             pubsub.publishSync("showTSLDialog", this.dialogTSLModelVisible);
-        },
-        uploadSuccess(response, file, fileList){
-            // console.log(response,file,fileList,">>>>>>>>..")
-            console.log(response.status );
-            console.log(">>>>>>>>>>>>>>>>>>.")
-            console.log(file,fileList)
-            if (file.status == 'success'){
-                this.$message.success(`上传文件${file.name}成功`)
-            }
         }
-
     },
     data() {
         return {
             dialogTSLModelVisible: false,
             dialogUploadFileVisible: false,
-          
-
         };
     },
 };

@@ -12,7 +12,7 @@
         <el-dialog title="提示" :visible.sync="dialogUploadFileVisible" width="60%">
             <div>
                 <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" accept=".json"
-                 :on-success="uploadSuccess" :on-remove="removeFile" :on-error="showUploadError"
+                 :on-success="uploadSuccess"
                     :limit="1">
                     <el-button size="small" type="primary">点击上传</el-button>
                     <div slot="tip" class="el-upload__tip">只能上传json文件</div>
@@ -49,13 +49,7 @@ export default {
             pubsub.publishSync("showTSLDialog", this.dialogTSLModelVisible);
         },
         uploadSuccess(response, file, fileList){
-            // console.log(response,file,fileList,">>>>>>>>..")
-            console.log(response.status );
-            console.log(">>>>>>>>>>>>>>>>>>.")
-            console.log(file,fileList)
-            if (file.status == 'success'){
-                this.$message.success(`上传文件${file.name}成功`)
-            }
+            console.log(response,file,fileList,">>>>>>>>..")
         }
 
     },
@@ -63,7 +57,7 @@ export default {
         return {
             dialogTSLModelVisible: false,
             dialogUploadFileVisible: false,
-          
+            fileList: [{ name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' }, { name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100' }]
 
         };
     },
