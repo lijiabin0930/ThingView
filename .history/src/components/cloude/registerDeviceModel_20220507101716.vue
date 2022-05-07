@@ -6,15 +6,6 @@
                 快速上传
             </el-button>
         </div>
-
-        <el-empty :image-size="150"></el-empty>
-
-
-
-
-
-
-
         <device-model-vue></device-model-vue>
         
         <!-- 文件上传逻辑解析 -->
@@ -32,7 +23,9 @@
                     <el-row :gutter="20">   
                     <el-col :span="18" :offset="22"><el-button type="warning" @click="onSubumitJson">提交</el-button></el-col>
                 </el-row>
+                    
                 </div>
+
             </div>
         </el-dialog>
 

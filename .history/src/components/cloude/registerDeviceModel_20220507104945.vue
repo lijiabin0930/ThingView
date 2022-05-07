@@ -7,7 +7,7 @@
             </el-button>
         </div>
 
-        <el-empty :image-size="150"></el-empty>
+        <el-empty :image-size="100"></el-empty>
 
 
 
