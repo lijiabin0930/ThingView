@@ -1,0 +1,161 @@
+<template>
+    <div>
+        <div style="margin-left: 20px; margin-top: 10px; margin-bottom: 20px">
+            <el-row>
+                <el-col :span="22">
+                    <el-button icon="el-icon-edit" type="primary" size="small">自定义</el-button>
+                </el-col>
+                <el-col :span="2">
+                    <el-button type="info" size="small" plain @click="oepndialogTSLModelVisible(true)">TSL模型</el-button>
+                    <el-button type="info" size="small" plain @click="dialogUploadFileVisible = true">
+                        快速上传
+                    </el-button>
+                </el-col>
+            </el-row>
+        </div>
+        <el-divider content-position="center"></el-divider>
+        <div>
+            <div>
+                <div v-if="showdata">
+                    <el-empty :image-size="150"></el-empty>
+
+                </div>
+                <el-table :data="tableData" stripe style="width: 100%">
+                    <el-table-column prop="date" label="日期">
+                    </el-table-column>
+                    <el-table-column prop="name" label="姓名">
+                    </el-table-column>
+                    <el-table-column prop="address" label="地址">
+                    </el-table-column>
+                </el-table>
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+        <device-model-vue></device-model-vue>
+
+        <!-- 文件上传逻辑解析 -->
+        <el-dialog title="提示" :visible.sync="dialogUploadFileVisible" width="60%">
+            <div>
+                <el-upload class="upload-demo" action="https://jsonplaceholder.typicode.com/posts/" accept=".json"
+                    :on-success="uploadSuccess" :limit="1" :file-list="fileList">
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <div slot="tip" class="el-upload__tip">只能上传json文件</div>
+                </el-upload>
+                <div v-if="isok" style="margin-left: 30px;margin-top: 30px;">
+                    <b-code-editor v-model="jsonStr" :auto-format="true" :smart-indent="true" theme="dracula"
+                        :indent-unit="4" :line-wrap="false" ref="editor"></b-code-editor>
+                    <br>
+                    <el-row :gutter="20">
+                        <el-col :span="18" :offset="22">
+                            <el-button type="warning" @click="onSubumitJson">提交</el-button>
+                        </el-col>
+                    </el-row>
+                </div>
+            </div>
+        </el-dialog>
+
+
+    </div>
+</template>
+<script>
+
+import deviceModelVue from "@/static/deviceModel.vue";
+//引入
+import pubsub from 'pubsub-js'
+
+
+export default {
+    name: "registerDeviceModel",
+    components: { deviceModelVue },
+    beforeDestroy() {
+        pubsub.unsubscribe('showTSLDialog');
+    },
+    created() {
+        console.log(this.modelDeviceJson);
+    },
+    methods: {
+        onSubumitJson() {
+            this.dialogUploadFileVisible = false
+            this.isok = false
+            this.jsonSt = null
+            this.fileList = []
+            //json 给后端 
+
+        },
+        oepndialogTSLModelVisible(result) {
+            this.dialogTSLModelVisible = result
+            pubsub.publishSync("showTSLDialog", this.dialogTSLModelVisible);
+        },
+        uploadSuccess(response, file, fileList) {
+            // console.log(response,file,fileList,">>>>>>>>..")
+            console.log(response.status);
+            console.log(">>>>>>>>>>>>>>>>>>.")
+            console.log(file, fileList)
+            if (file.status == 'success') {
+                this.$message.success(`上传文件${file.name}成功`)
+            }
+            this.isok = true
+        },
+        // 检测json格式
+        isJSON(str) {
+            if (typeof str == 'string') {
+                try {
+                    var obj = JSON.parse(str);
+                    if (typeof obj == 'object' && obj) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+
+                } catch (e) {
+                    return false;
+                }
+            } else if (typeof str == 'object' && str) {
+                return true;
+            }
+        },
+        onSubumit() {
+            if (!this.isJSON(this.jsonStr)) {
+                this.$message.error(`json格式错误`)
+                return false
+            }
+            this.$message.success('json格式正确')
+        }
+    },
+    data() {
+        return {
+            fileList: [],
+            dialogTSLModelVisible: false,
+            dialogUploadFileVisible: false,
+            jsonStr: `{
+                    "employees": [{
+                    "firstName": "Bill",
+                    "lastName": "Gates"
+                    }, {
+                    "firstName": "George",
+                    "lastName": "Bush"
+                    }, {
+                    "firstName": "Thomas",
+                    "lastName": "Carter"
+                    }]
+                         }`,
+            isok: false
+
+
+        };
+    },
+};
+</script>
+
+<style scoped lange="less">
+</style>
